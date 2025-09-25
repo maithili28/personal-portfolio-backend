@@ -1,3 +1,5 @@
+import path from "path";
+import { fileURLToPath } from "url";
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -6,12 +8,8 @@ import portfolioRoutes from "./routes/portfolioRoutes.js";
 
 dotenv.config();
 const app = express();
-// for testing
-app.get("/api/test", (req, res) => {
-  res.json({ message: "API is working" });
-});
 
-// ✅ Allow AWS domain + local dev
+// CORS setup
 const allowedOrigins = [
   "http://localhost:5173",
   "https://Portfolio-env.eba-nkk2djex.ap-south-1.elasticbeanstalk.com",
@@ -23,16 +21,26 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
 app.use(express.json());
 
-// ✅ MongoDB Connection
+// MongoDB connection
 mongoose
   .connect(process.env.MONGO_URI)
-
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error(err));
 
-// ✅ Routes
+// API routes
 app.use("/api", portfolioRoutes);
 
-export default app; // <-- IMPORTANT for server.js
+// Serve React frontend
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, "frontend_build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend_build", "index.html"));
+});
+
+export default app;

@@ -5,8 +5,7 @@ COPY package*.json ./
 RUN npm install --production
 COPY . .
 
-# Use EB port (will be passed at runtime)
+# Use EB port at runtime
 EXPOSE 8080
 
-# Start server
 CMD ["node", "server.js"]
