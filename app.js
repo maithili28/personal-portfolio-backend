@@ -6,6 +6,10 @@ import portfolioRoutes from "./routes/portfolioRoutes.js";
 
 dotenv.config();
 const app = express();
+// for testing
+app.get("/api/test", (req, res) => {
+  res.json({ message: "API is working" });
+});
 
 // ✅ Allow AWS domain + local dev
 const allowedOrigins = [
