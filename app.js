@@ -1,10 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import cors from "cors";
 import portfolioRoutes from "./routes/portfolioRoutes.js";
 
-dotenv.config();
+// dotenv.config();
 const app = express();
 // for testing
 app.get("/api/test", (req, res) => {
@@ -27,9 +27,8 @@ app.use(express.json());
 
 // ✅ MongoDB Connection
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  .connect("mongodb+srv://mmaithili15_db_user:AY5EXcDfN1eH0uOP@cluster0.rmrob2i.mongodb.net/personal-portfolio?retryWrites=true&w=majority&appName=Cluster0", {
+  
   })
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error(err));
