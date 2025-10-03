@@ -1,6 +1,6 @@
 import Portfolio from "../models/Portfolio.model.js";
 
-// ➕ Add portfolio data
+
 export const addPortfolio = async (req, res) => {
   try {
     const portfolio = new Portfolio(req.body);
@@ -12,7 +12,7 @@ export const addPortfolio = async (req, res) => {
   }
 };
 
-// 📥 Get portfolio data
+
 export const getPortfolio = async (req, res) => {
   try {
     const portfolio = await Portfolio.find();
@@ -24,8 +24,7 @@ export const getPortfolio = async (req, res) => {
 };
 
 
-// get data with id 
-// 📥 Get portfolio data by ID
+
 export const getPortfolioById = async (req, res) => {
   try {
     const portfolio = await Portfolio.findById(req.params.id);
