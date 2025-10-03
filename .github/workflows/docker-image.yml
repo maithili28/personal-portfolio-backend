@@ -23,5 +23,5 @@ jobs:
       - name: Deploy to Elastic Beanstalk
         run: |
           pip install awsebcli
-          eb init -p docker personal-portfolio-backend --region ap-south-1
+          eb init -p docker Portfolio-env --region ap-south-1
           eb deploy
