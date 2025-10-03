@@ -24,4 +24,5 @@ jobs:
         run: |
           pip install awsebcli
           eb init -p docker Portfolio-env --region ap-south-1
+          eb use Portfolio-env-env
           eb deploy
